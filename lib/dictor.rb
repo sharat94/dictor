@@ -56,8 +56,9 @@ class Dictor
       next unless number_map_values
       number_map_values.each do |value|
         new_word = value.empty? ? "#{value}" : "#{word}-#{value}"
-        build_fancy_number_list(wordspace, phone, new_word)
-        build_fancy_number_list(wordspace, phone,"#{new_word}-#{phone[pointer + value.length]}")
+        full_word_matches(wordspace, phone, new_word)
+        new_word = "#{new_word}-#{phone[pointer + value.length]}"
+        partial_word_matches(wordspace, phone, new_word)
       end
     end
     @wordlist
@@ -76,8 +77,17 @@ class Dictor
     build_fancy_number_list(wordspace, phone)
   end
 
+  def full_word_matches(wordspace, phone, new_word)
+    build_fancy_number_list(wordspace, phone, new_word)
+  end
+
+  def partial_word_matches(wordspace, phone, new_word)
+    build_fancy_number_list(wordspace, phone, new_word)
+  end
+
   def load_dictionary
     @dict.each do |word|
+      next if (word =~ /\A[-+]?[0-9]+\z/)&.zero?
       formatted_word = word.downcase
       formatted_number = formatted_word.scan(/./).map{ |l| @encoder[l]}.join.to_s
       @number_map[formatted_number] ||= []
