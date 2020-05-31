@@ -13,8 +13,19 @@ OptionParser.new do |opts|
       File.open(file) { |f| @options[:phones] = f.readlines }
       }
 end.parse!
-phones = @options[:phones] || File.open('phone.txt') { |f| @options[:phones] = f.readlines }
+phones = @options[:phones]
 dict = @options[:dict] || File.open('dict.txt') { |f| @options[:dict] = f.readlines }
+if phones.nil?
+  puts 'Enter phone number'
+  while phone = gets
+    phone.gsub!(/[^\d]/, '')
+    next if phone.empty?
+    phones = [phone]
+    Dictor.new(verbose: @options[:verbose],
+               dict: dict,
+               phones: phones).process!
+  end
+end
 Dictor.new(verbose: @options[:verbose],
            dict: dict,
            phones: phones).process!
