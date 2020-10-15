@@ -1,5 +1,5 @@
 # dictor 
-[![Inline docs](http://inch-ci.org/github/sharat94/dictor.svg?branch=master)](http://inch-ci.org/github/sharat94/dictor)
+[![Inline docs](http://inch-ci.org/github/sharat94/dictor.svg?branch=master)](http://inch-ci.org/github/sharat94/dictor)[![CodeFactor](https://www.codefactor.io/repository/github/sharat94/dictor/badge)](https://www.codefactor.io/repository/github/sharat94/dictor)
 
 Prints words for phone numbers
 run ``` ruby lib/run_me.rb -v ```.
